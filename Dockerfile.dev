@@ -1,0 +1,20 @@
+# Specify a base image.
+FROM node:alpine
+
+# Create directory in the container to copy files into. 
+# This automatically selected by the copy command.
+WORKDIR '/app'
+
+# Used to bring in the package.js file. 
+# Here only package.json is copied so that if changes are made 
+# to other files caching is not broken.
+COPY package.json .
+
+# Install dependencies. 
+RUN npm install 
+
+# Copy the rest of the files.
+COPY . .
+
+# Default command. 
+CMD ["npm", "run", "start"]
