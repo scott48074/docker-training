@@ -1,0 +1,11 @@
+language: generic 
+
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t utilitydog/docker-training -f Dockerfile.dev . 
+
+script:
+  - docker run -e CI=true utilitydog/docker-training npm run test
